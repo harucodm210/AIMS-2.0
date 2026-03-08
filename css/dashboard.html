@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>AIMS Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="loadDashboard()">
+
+<div class="topbar">
+<div class="logo">AIMS</div>
+
+<div class="nav-links">
+<a href="dashboard.html">Dashboard</a>
+<a href="profile.html">Profile</a>
+<a href="index.html" onclick="logout()">Logout</a>
+</div>
+</div>
+
+<div class="content">
+
+<h2>Welcome <span id="userNameDisplay"></span></h2>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" style="display:none;">
+
+<h3>Admin Control Panel</h3>
+
+<input id="studentName" placeholder="Student Name">
+<input id="studentUsername" placeholder="Username">
+<input id="studentPassword" placeholder="Password">
+
+<button onclick="addStudent()">Add Student</button>
+
+<hr>
+
+<h3>Add Grade to Student</h3>
+
+<select id="selectStudent"></select>
+
+<input id="code" placeholder="Subject Code">
+<input id="desc" placeholder="Description">
+<input id="prelim" type="number" placeholder="Prelim">
+<input id="midterm" type="number" placeholder="Midterm">
+<input id="endterm" type="number" placeholder="Endterm">
+
+<button onclick="addGrade()">Add Grade</button>
+
+</div>
+
+<hr>
+
+<h3>Grades</h3>
+
+<table>
+<thead>
+<tr>
+<th>Student</th>
+<th>Code</th>
+<th>Description</th>
+<th>Prelim</th>
+<th>Midterm</th>
+<th>Endterm</th>
+<th>Average</th>
+</tr>
+</thead>
+
+<tbody id="gradeTable"></tbody>
+
+</table>
+
+</div>
+
+<script src="js/script.js"></script>
+
+<script>
+
+/* Load student dropdown for admin */
+let students = JSON.parse(localStorage.getItem("students")) || [];
+let select = document.getElementById("selectStudent");
+
+students.forEach(s=>{
+let option = document.createElement("option");
+option.value = s.username;
+option.text = s.username;
+select?.appendChild(option);
+});
+
+</script>
+
+</body>
+</html>
